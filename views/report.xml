@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <report
+                id="workingspace_report"
+                model="workingspace.wizard"
+                report_type="qweb-pdf"
+                string="regular customer Report"
+                name="workingspace.workingspace_template"
+        />
+        <template id="workingspace_template">
+
+            <t t-foreach="data['form']" t-as="data">
+                <t t-call="web.external_layout">
+                    <div class="page" dir="rtl">
+                        <h3 style="text-align:center;">Reservations Report</h3>
+                        <table class='table table-bordered ' width="100%">
+                            <thead style="background-color: #cfc9ca !important;">
+
+                            </thead>
+                            <tbody>
+                                <html>
+                                    <head>
+                                        <style>
+                                            table, th, td {
+                                            border: 1px solid black;
+                                            border-collapse: collapse;
+                                            }
+                                        </style>
+                                    </head>
+                                    <body>
+                                        <t t-if="val == 'room'">
+
+                                        <table style="width:100%">
+                                            <tr>
+                                                <th>Room</th>
+                                                <th>Date From</th>
+                                                <th>Date To</th>
+                                                <th>Total fees</th>
+
+                                            </tr>
+
+                                            <tr>
+                                                <td>
+                                                    <span t-esc="data['room_id'].name"/>
+                                                </td>
+
+                                                <td>
+                                                    <span t-esc="data['time_from']"/>
+                                                </td>
+                                                <td>
+                                                    <span t-esc="data['time_to']"/>
+                                                </td>
+                                                 <td>
+                                                     <t t-set="total_fees" t-value="data['total_hours']*5" />
+                                                    <span t-esc="total_fees"/>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        </t>
+                                        <t t-if="val == 'regcustomer'">
+                                            <table style="width:100%">
+                                            <tr>
+                                                <th>customer</th>
+                                                <th>Total Hours</th>
+                                                <th>products</th>
+                                                <th>Total Fees</th>
+
+                                            </tr>
+
+                                            <tr>
+                                                <td>
+                                                    <span t-esc="data['customer_name'].name"/>
+                                                </td>
+
+                                                <td>
+                                                    <span t-esc="data['total_hours']"/>
+                                                </td>
+                                                <td>
+                                                    <t t-foreach="data['product_orders_ids']" t-as="i">
+                                                        <span t-esc="i['product_id'].name"/>
+                                                    </t>
+                                                </td>
+                                                <td>
+                                                    <span t-esc="data['total_fees']"/>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        </t>
+                                    </body>
+                                </html>
+                            </tbody>
+                        </table>
+
+                    </div>
+                </t>
+            </t>
+
+
+        </template>
+        <record id="paperformat_hr_employee_report" model="report.paperformat">
+            <field name="name">Employee Report</field>
+            <field name="default" eval="True"/>
+            <field name="format">A4</field>
+            <field name="orientation">Landscape</field>
+            <field name="margin_top">40</field>
+            <field name="margin_bottom">23</field>
+            <field name="margin_left">5</field>
+            <field name="margin_right">5</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">35</field>
+            <field name="dpi">90</field>
+        </record>
+
+    </data>
+</odoo>

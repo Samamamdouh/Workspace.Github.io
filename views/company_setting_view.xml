@@ -1,0 +1,104 @@
+<odoo>
+    <data>
+
+        <record model="ir.ui.view" id="workingspace_graph_view">
+            <field name="name">workingspace.graph</field>
+            <field name="model">workingspace.room</field>
+            <field name="arch" type="xml">
+                <graph string="">
+                    <field name="name"/>
+                    <field name="reservation_count" type="measure"/>
+                </graph>
+            </field>
+        </record>
+
+        <record id="products_tree_view" model="ir.ui.view">
+            <field name="name">products</field>
+            <field name="model">workingspace.product</field>
+            <field name="arch" type="xml">
+                <tree string="">
+                    <field name="name"/>
+                    <field name="product_price"/>
+                    <field name="qty"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="room_tree_view" model="ir.ui.view">
+            <field name="name">room.tree</field>
+            <field name="model">workingspace.room</field>
+            <field name="arch" type="xml">
+                <tree string="Room Information">
+                    <field name="name"/>
+                    <field name="price"/>
+                    <field name="capacity"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="room_form_view" model="ir.ui.view">
+            <field name="name">room.form</field>
+            <field name="model">workingspace.room</field>
+            <field name="arch" type="xml">
+                <form string="Room Form">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="price"/>
+                            <field name="capacity"/>
+                            <field name="responsible_id"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="products_form_view" model="ir.ui.view">
+            <field name="name">products form</field>
+            <field name="model">workingspace.product</field>
+            <field name="arch" type="xml">
+                <form string="">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="product_price"/>
+                            <field name="qty"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="room_menu_action" model="ir.actions.act_window">
+            <field name="name">room menu</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">workingspace.room</field>
+            <field name="view_mode">tree,form,graph</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    <!-- Add Text Here -->
+                </p>
+                <p>
+                    <!-- More details about what a user can do with this object will be OK -->
+                </p>
+            </field>
+        </record>
+
+        <record id="products_action" model="ir.actions.act_window">
+            <field name="name">products</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">workingspace.product</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+              </p>
+            </field>
+        </record>
+
+        <menuitem id="workingspace_setting" name="Working Space setting" parent="workingspace_main"/>
+        <menuitem id="rooms_menu" name="Room" parent="workingspace_setting" action="room_menu_action" sequence=""/>
+        <!-- This Menu Item must have a parent and an action -->
+        <!-- This Menu Item must have a parent and an action -->
+        <menuitem id="products_menu" name="products" parent="workingspace_setting" action="products_action" sequence=""/>
+    </data>
+</odoo>

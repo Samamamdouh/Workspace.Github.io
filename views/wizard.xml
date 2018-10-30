@@ -1,0 +1,33 @@
+<odoo>
+    <data>
+         <record model="ir.ui.view" id="wizard_form_view">
+            <field name="name">wizard.form</field>
+            <field name="model">workingspace.wizard</field>
+            <field name="arch" type="xml">
+                <form string="regular customer wizard">
+                    <group>
+                        <field name="choose"/>
+                        <field name="date_from"/>
+                        <field name="date_to"/>
+                        <!--<field name="room_id" attrs="{'invisible': [('choose', '=', 'regcustomer')]}"/>-->
+                        <field name="regcustomer_name" attrs="{'invisible': [('choose', '=', 'room')]}" />
+                        <button string="print" name="print_report" type="object" class="oe_highlight"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <act_window id="launch_reservation_wizard"
+                    name="WorkingSpace Wizrad"
+                    res_model="workingspace.wizard"
+                    view_mode="form"
+                    target="new"
+                    key2="client_action_multi"/>
+
+
+        <!-- This Menu Item must have a parent and an action -->
+        <menuitem id="wizrad_menu" name="Reports" parent="workingspace_main"/>
+        <!-- This Menu Item must have a parent and an action -->
+        <menuitem id="regcustomer_wizrad" name="Workingspace Report" parent="wizrad_menu" action="launch_reservation_wizard" sequence=""/>
+    </data>
+</odoo>

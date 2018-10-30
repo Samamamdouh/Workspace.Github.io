@@ -1,0 +1,72 @@
+<odoo>
+    <data>
+
+        <record id="regcustomer_tree_view" model="ir.ui.view">
+            <field name="name">regcustomer.tree</field>
+            <field name="model">workingspace.regcustomer</field>
+            <field name="arch" type="xml">
+                <tree string="Regular Customer">
+                    <field name="customer_name"/>
+                    <field name="arrive_time"/>
+                    <field name="leave_time"/>
+                    <field name="total_fees"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="regcustomer_from_view" model="ir.ui.view">
+            <field name="name">regcustomer.form</field>
+            <field name="model">workingspace.regcustomer</field>
+            <field name="arch" type="xml">
+                <form string="Regular Customer Form">
+                    <header>
+                        <button string="Running" name="running" type="object" class="oe_highlight"/>
+                        <field name="state" widget="statusbar"/>
+                        <button string="Closed" name="closed" type="object" class="oe_highlight"/>
+
+                    </header>
+                    <sheet>
+                        <group>
+                            <field name="customer_name"/>
+                            <field name="arrive_time"/>
+                            <field name="leave_time"/>
+                            <field name="total_hours"/>
+                            <field name="product_orders_ids">
+                                <tree editable="bottom">
+                                    <field name="product_id"/>
+                                    <field name="orderd_qty"/>
+                                </tree>
+                            </field>
+                            <field name="total_fees"/>
+                            <button string="Create in URL" name="creaturl" type="object" class="oe_highlight"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="regcustomer_menu_action" model="ir.actions.act_window">
+            <field name="name">regular customer menu</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">workingspace.regcustomer</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    <!-- Add Text Here -->
+                </p>
+                <p>
+                    <!-- More details about what a user can do with this object will be OK -->
+                </p>
+            </field>
+        </record>
+
+        <!-- This Menu Item will appear in the Upper bar, That's why It needs NO parent or action -->
+        <menuitem id="workingspace_main" name="workingSpace" sequence=""/>
+
+        <menuitem id="workingspace_menu" name="Working Space Menu" parent="workingspace_main"/>
+        <!-- This Menu Item must have a parent and an action -->
+        <menuitem id="regcustomer_menu" name="Regular Customer" parent="workingspace_menu"
+                  action="regcustomer_menu_action" sequence=""/>
+
+    </data>
+</odoo>

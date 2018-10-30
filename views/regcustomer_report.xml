@@ -1,0 +1,45 @@
+<odoo>
+
+    <report
+        id="report_regcustomer"
+        model="workingspace.regcustomer"
+        string="Regular customer Report"
+        name="workingspace.report_regcustomer_view"
+        file="workingspace.report_regcustomer"
+        report_type="qweb-pdf" />
+
+    <template id="report_regcustomer_view">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                         <h3 style="text-align:center;">Regular Customer Report</h3>
+                        <h2 t-field="doc.customer_name"/>
+                        <h3>From: <span t-field="doc.arrive_time"/> To: <span t-field="doc.leave_time"/></h3>
+                        <h3>Total Hours: <span t-field="doc.total_hours"/> </h3>
+                        <h3>Total Fees: <span t-field="doc.total_fees"/> </h3>
+                        <h3>Products:</h3>
+                         <table style="width:100%">
+                             <tr>
+                                 <th>product</th>
+                                 <th>Quantity</th>
+                             </tr>
+                             <t t-foreach="doc.product_orders_ids" t-as="product">
+                             <tr>
+                                 <td>
+                                     <span t-esc="product['product_id'].name"/>
+                                 </td>
+
+                                 <td>
+                                     <span t-esc="product['orderd_qty']"/>
+                                 </td>
+                             </tr>
+                             </t>
+                         </table>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+</odoo>

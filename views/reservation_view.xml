@@ -1,0 +1,90 @@
+<odoo>
+    <data>
+        <!--search view-->
+        <record model="ir.ui.view" id="reservation_search_view">
+            <field name="name">reservation.search</field>
+            <field name="model">workingspace.reservation</field>
+            <field name="arch" type="xml">
+               <search>
+                    <field name="room_id" filter_domain="[('room_id.name','ilike',self)]" />
+                    <!--<field name="description"/>-->
+                    <filter name="state" string="State is Running"
+                            domain="[('state', '=', 'running')]"/>
+                    <filter name="state" string="State is Closed"
+                            domain="[('state', '=', 'closed')]"/>
+                    <!--<group string="Group By">-->
+                        <!--<filter name="state" string="Responsible"-->
+                                <!--context="{'group_by': 'state'}"/>-->
+                    <!--</group>-->
+                </search>
+            </field>
+        </record>
+
+         <!--<record model="ir.ui.view" id="workingspace_graph_view">-->
+            <!--<field name="name">workingspace.graph</field>-->
+            <!--<field name="model">workingspace.reservation</field>-->
+            <!--<field name="arch" type="xml">-->
+                <!--<graph string="">-->
+                    <!--<field name="room_id"/>-->
+                    <!--<field name="total_hours" type="measure"/>-->
+                <!--</graph>-->
+            <!--</field>-->
+        <!--</record>-->
+
+        <record id="reservation_tree_view" model="ir.ui.view">
+            <field name="name">reservation</field>
+            <field name="model">workingspace.reservation</field>
+            <field name="arch" type="xml">
+                <tree string="Reservation">
+                    <field name="room_id"/>
+                    <field name="time_from"/>
+                    <field name="time_to"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="reservation_form_view" model="ir.ui.view">
+            <field name="name">reservation form</field>
+            <field name="model">workingspace.reservation</field>
+            <field name="arch" type="xml">
+                <form string="reservation form">
+                    <!--<header>-->
+                   <!--<button string="Running" name="running" type="object" class="oe_highlight"/>-->
+                   <!--<field name="state" widget="statusbar"/>-->
+                   <!--<button string="Closed" name="closed" type="object" class="oe_highlight"/>-->
+                <!--</header>-->
+                    <sheet>
+                        <group>
+                            <field name="room_id"/>
+                            <field name="time_from" required="True"/>
+                            <field name="time_to" required="True"/>
+                            <field name="total_hours"/>
+                            <field name="customer_id"/>
+                            <field name="total_fees"/>
+                            <!--<button string="Create in URL" name="creaturl" type="object" class="oe_highlight"/>-->
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="reservation_menu_action" model="ir.actions.act_window">
+            <field name="name">reservation menu</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">workingspace.reservation</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                <!-- Add Text Here -->
+              </p><p>
+                <!-- More details about what a user can do with this object will be OK -->
+              </p>
+            </field>
+        </record>
+
+         <!-- This Menu Item must have a parent and an action -->
+     <menuitem id="reservation_menu" name="Reservation" parent="workingspace_menu" action="reservation_menu_action" sequence=""/>
+
+    </data>
+</odoo>

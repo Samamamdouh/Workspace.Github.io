@@ -1,0 +1,17 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_workingspace1,workingspace.workingspace,model_regcustomer_customer,owner_group,1,1,1,1
+access_workingspace2,workingspace.workingspace,model_product_order_line,owner_group,1,1,1,1
+access_workingspace3,workingspace.workingspace,model_workingspace_product,owner_group,1,1,1,1
+access_workingspace4,workingspace.workingspace,model_workingspace_regcustomer,owner_group,1,1,1,1
+access_workingspace5,workingspace.workingspace,model_workingspace_reservation,owner_group,1,1,1,1
+access_workingspace6,workingspace.workingspace,model_workingspace_room,owner_group,1,1,1,1
+access_workingspace7,workingspace.workingspace,model_workingspace_wizard,owner_group,1,1,1,1
+
+
+access_workingspace8,workingspace.workingspace,model_regcustomer_customer,admin_group,1,1,1,0
+access_workingspace9,workingspace.workingspace,model_product_order_line,admin_group,1,1,1,0
+access_workingspace10,workingspace.workingspace,model_workingspace_product,admin_group,1,1,1,0
+access_workingspace11,workingspace.workingspace,model_workingspace_regcustomer,admin_group,1,1,1,0
+access_workingspace12,workingspace.workingspace,model_workingspace_reservation,admin_group,1,1,1,0
+access_workingspace13,workingspace.workingspace,model_workingspace_room,admin_group,1,0,0,0
+access_workingspace14,workingspace.workingspace,model_workingspace_wizard,admin_group,1,1,1,0

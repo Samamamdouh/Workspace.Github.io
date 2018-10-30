@@ -1,0 +1,32 @@
+<odoo>
+    <data>
+        <record id="category_security_workingspace" model="ir.module.category">
+            <field name="name">Categ</field>
+            <field name="sequence" eval="1"/>
+        </record>
+
+        <record id="admin_group" model="res.groups">
+            <field name="name">workingspace / admin</field>
+            <field name="category_id" ref="category_security_workingspace"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+        <record id="owner_group" model="res.groups">
+            <field name="name">workingspace / owner</field>
+            <field name="category_id" ref="category_security_workingspace"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+        <record id="admin_security" model="ir.rule">
+            <field name="name">responsible_id</field>
+            <field ref="model_workingspace_room" name="model_id"/>
+            <field name="domain_force">[('responsible_id', '=',user.id)]</field>
+            <field name="perm_write" eval="0"/>
+            <field name="perm_create" eval="0"/>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_unlink" eval="0"/>
+            <!-- You can attach this rule to a specific group, Or make it Global -->
+            <field name="groups" eval="[(4, ref('admin_group'))]"/>
+            <!--<field name="global" eval="1"/> -->
+        </record>
+    </data>
+</odoo>
